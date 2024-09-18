@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый вид</title>
+
+</head>
+<body>
+    <header>
+        <h1>Добавить новый вид</h1>
+    </header>
+
+    <main>
+        <div class="buttons">
+            <a class="button" href="{{ url_for('home') }}">Назад на главную</a>
+        </div>
+
+            <form class="forms" method="POST" enctype="multipart/form-data">
+            <label for="name" class="form_name">Название вида:</label>
+            <input class="form_input" type="text" id="name" name="name" required>
+
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="habitat">Место обитания:</label>
+            <input type="text" id="habitat" name="habitat" required>
+
+            <label for="image">Изображение:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Добавить</button>
+
+            </form>
+
+
+    </main>
+
+
+</body>
+</html>
