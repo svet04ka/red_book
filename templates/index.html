@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Краснокнижные виды Москвы</title>
+</head>
+<body>
+    <header>
+        <h1>Краснокнижные виды Москвы</h1>
+    </header>
+
+    <main>
+        <h2>Редкие виды</h2>
+
+        <ul class="cards">
+            <li>
+              <a href="" class="card">
+                <img src="./static/animal.jpg" class="card__image" alt="" />
+                <div class="card__overlay">
+                  <div class="card__header">
+                    <div class="card__header-text">
+                      <h3 class="card__title">animal name</h3>
+                    </div>
+                  </div>
+                  <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="" class="card">
+                <img src="./static/animal.jpg" class="card__image" alt="" />
+                <div class="card__overlay">
+                  <div class="card__header">
+                    <div class="card__header-text">
+                      <h3 class="card__title">animal name</h3>
+                    </div>
+                  </div>
+                  <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="" class="card">
+                <img src="./static/animal.jpg" class="card__image" alt="" />
+                <div class="card__overlay">
+                  <div class="card__header">
+                    <div class="card__header-text">
+                      <h3 class="card__title">animal name</h3>
+                    </div>
+                  </div>
+                  <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="" class="card">
+                <img src="./static/animal.jpg" class="card__image" alt="" />
+                <div class="card__overlay">
+                  <div class="card__header">
+                    <div class="card__header-text">
+                      <h3 class="card__title">animal name</h3>
+                    </div>
+                  </div>
+                  <p class="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        <div class="buttons">
+            <a href="{{ url_for('species') }}" class="button">Посмотреть виды</a>
+            <a href="{{ url_for('add_species') }}" class="button">Добавить новый вид</a>
+        </div>
+
+
+        <h2>Карта мест обитания</h2>
+        <div id="map" class="map">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A819193017a27dbafe1ee7d64cc5d53f01518ef10e132ccfa2b161dcd489f762e"
+                    width="100%" height="500" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Интерактивная карта редких видов. Все права защищены.</p>
+    </footer>
+</body>
+</html>

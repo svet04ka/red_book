@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Верификация видов</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Верификация видов</h1>
+    <ul>
+    {% for index, species in enumerate(species) %}
+        <li>
+            <h2>{{ species.name }}</h2>
+            <p>{{ species.description }}</p>
+            <p><strong>Место обитания:</strong> {{ species.habitat }}</p>
+            <form method="POST" action="{{ url_for('verify_species', species_index=index) }}">
+                <button type="submit">Верифицировать</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Назад на главную</a>
+</body>
+</html>
