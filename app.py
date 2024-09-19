@@ -185,54 +185,54 @@ def add_species():
 
 @app.route('/verification', methods=['GET', 'POST'])
 def verification():
-    conn = sqlite3.connect('instance/species_data.db')
     if 'logged_in' in session and session['logged_in']:
         if request.method == 'POST':
             species_id = request.form.get('species_id')
             action = request.form.get('action')  # 'approve' or 'reject'
 
+            with sqlite3.connect('instance/species_data.db') as conn:
+                cursor = conn.cursor()
+
+                if action == 'approve':
+                    # Обновление статуса записи в таблице pending_species
+                    cursor.execute("UPDATE pending_species SET status = 'approved' WHERE id = ?", (species_id,))
+                    conn.commit()
+
+                    # Перенос одобренной записи в таблицу "species_data"
+                    cursor.execute(
+                        "INSERT INTO species_data (name, description, habitat, image_path, rarity, coords, species_type, species_class, family) "
+                        "SELECT name, description, habitat, image_path, rarity, coords, species_type, species_class, family "
+                        "FROM pending_species WHERE id = ?",
+                        (species_id,)
+                    )
+                    conn.commit()
+
+                    # Удаление записи из pending_species
+                    cursor.execute("DELETE FROM pending_species WHERE id = ?", (species_id,))
+                    conn.commit()
+
+                    flash('Запись успешно одобрена!', 'success')
+
+                elif action == 'reject':
+                    # Удаление записи из таблицы pending_species
+                    cursor.execute("DELETE FROM pending_species WHERE id = ?", (species_id,))
+                    conn.commit()
+
+                    flash('Запись отклонена', 'info')
+
+            # После выполнения POST-запроса всегда делаем редирект на ту же страницу
+            return redirect(url_for('verification'))
+
+        # При GET-запросе загружаем список непроверенных записей
+        with sqlite3.connect('instance/species_data.db') as conn:
             cursor = conn.cursor()
-
-            if action == 'approve':
-                # Обновление статуса записи в таблице pending_species
-                cursor.execute("UPDATE pending_species SET status = 'approved' WHERE id = ?", (species_id,))
-                conn.commit()
-
-                # Перенос одобренной записи в таблицу "species_data"
-                cursor.execute(
-                    "INSERT INTO species_data (name, description, habitat, image_path, rarity, coords, species_type, species_class, family) "
-                    "SELECT name, description, habitat, image_path, rarity, coords, species_type, species_class, family "
-                    "FROM pending_species WHERE id = ?",
-                    (species_id,)
-                )
-                conn.commit()
-
-                # Удаление записи из pending_species
-                cursor.execute("DELETE FROM pending_species WHERE id = ?", (species_id,))
-                conn.commit()
-                flash('Запись успешно одобрена!', 'success')
-
-            elif action == 'reject':
-                # Удаление записи из таблицы pending_species
-                cursor.execute("DELETE FROM pending_species WHERE id = ?", (species_id,))
-                conn.commit()
-                flash('Запись отклонена', 'info')
-
-            # Получение записей из таблицы pending_species
-            cursor.execute("SELECT * FROM pending_species")
+            cursor.execute("SELECT * FROM pending_species WHERE status = 'pending'")
             pending_species = cursor.fetchall()
 
-            cursor.close()
-            return render_template('verification.html', pending_species=pending_species)
-        else:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM pending_species")
-            pending_species = cursor.fetchall()
-            cursor.close()
-            return render_template('verification.html', pending_species=pending_species)
+        return render_template('verification.html', pending_species=pending_species)
     else:
-        conn.close()
         return redirect(url_for('home'))
+
 
 @app.route('/edit_specie/<int:specie_id>', methods=['GET', 'POST'])
 def edit_specie(specie_id):
