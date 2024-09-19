@@ -3,45 +3,44 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить новый вид</title>
+    <title>Редактирование вида</title>
 </head>
 <body>
-    <header>
-        <h1>Добавить новый вид</h1>
-    </header>
+<header>
+    <h2>Редактирование вида</h2>
+</header>
 
-    <main>
-        <div class="buttons">
+<main>
+    <div class="buttons">
             <a class="button" href="{{ url_for('home') }}">Назад на главную</a>
-        </div>
+    </div>
 
-        <div class="forma">
-        <form class="forms" method="POST" enctype="multipart/form-data">
+    <div class="forma">
+        <form class="forms" method="POST" action="{{ url_for('edit_specie', specie_id=specie.id) }}">
+        <form method="POST" enctype="multipart/form-data">
         <label class="form_title" for="type">Тип:</label>
-        <select id="type" name="type" required>
+        <select id="type" name="type" >
             <option value="растение">Растение</option>
             <option value="животное">Животное</option>
         </select>
 
         <label class="form_title" for="name">Название вида:</label>
-        <input class="form_input" type="text" id="name" name="name" required>
+        <input class="form_input" type="text" id="name" name="name" value="{{ specie.name }}">
 
         <label class="form_title" for="description">Описание:</label>
-        <textarea id="description" name="description" required></textarea>
-
-
+        <textarea id="description" name="description">{{ specie.description }}</textarea>
 
         <label class="form_title" for="class">Класс:</label>
-        <input class="form_input" type="text" id="class" name="class" required>
+        <input class="form_input" type="text" id="class" name="class" value="{{ specie.class }}">
 
         <label class="form_title" for="family">Семейство:</label>
-        <input class="form_input" type="text" id="family" name="family" required>
+        <input class="form_input" type="text" id="family" name="family" value="{{ specie.family }}">
 
         <label class="form_title" for="coords">Координаты:</label>
-        <input class="form_input" type="text" id="coords" name="coords" required>
+        <input class="form_input" type="text" id="coords" name="coords" value="{{ specie.coords }}">
 
         <label class="form_title" for="habitat">Место обитания в Москве:</label>
-        <select id="habitat" name="habitat" required>  <!-- Исправлено имя name="habitat" -->
+        <select id="habitat" name="habitat" >  <!-- Исправлено имя name="habitat" -->
             <option value="москворецкий">Москворецкий парк</option>
             <!-- Добавьте другие варианты -->
             <option value="измайловский">Измайловский парк</option>
@@ -50,8 +49,8 @@
             <!-- ... и так далее -->
         </select>
         <label class="form_title" for="rarity">Степень краснокнижности:</label>
-        <select id="rarity" name="rarity" required>
-            <option value="вероятно исчезнувшие">вероятно исчезнувшие</option>
+        <select id="rarity" name="rarity" >
+            <option value="вероятно исчезнувшие" >вероятно исчезнувшие</option>
             <option value="находящиеся под угрозой исчезновения">находящиеся под угрозой исчезновения</option>
             <option value="сокращающиеся в численности">сокращающиеся в численности</option>
             <option value="редкие">редкие</option>
@@ -60,11 +59,14 @@
 
         </select>
 
-        <label class="form_title" for="image">Изображение:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
+        <div class="buttons">
+            <button class="button" type="submit">Сохранить</button>
+        </div>
 
-        <button type="submit">Добавить</button>
     </form>
+    </form>
+    </div>
+
     </main>
 <a class="a" href="{{ url_for('home') }}">Назад на главную</a>
 </body>

@@ -5,6 +5,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Racama';
+  src: url('fonts/Racama.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -44,9 +53,14 @@ h2 {
     color: white;
     background-color: rgba(0, 153, 0, 0.68);
     text-decoration: none;
-    padding: 20px 35px;
+    padding: 12px 50px;
     margin: 20px;
     border-radius: 39px;
+    width: auto;
+}
+
+.button:hover {
+    background-color: #45a049;
 }
 
 .species {
@@ -74,6 +88,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+    margin: 0
 }
 
 :root {
@@ -84,6 +99,8 @@ footer {
   body {
     font-family: 'Noto Sans JP', sans-serif;
     background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
   }
   
   .cards {
@@ -166,13 +183,14 @@ footer {
     font-size: 16px;
     margin: 0 0 .3em;
     color: #024e02;
+    font-family: 'Inter';
   }
   
   .card__tagline {
     display: block;
     margin: 1em 0;
-    font-family: "MockFlowFont";  
-    font-size: .8em; 
+    font-family: "Inter";
+    font-size: 14px;
     color: #D7BDCA;  
   }
   
@@ -185,9 +203,178 @@ footer {
     padding: 0 2em 2em;
     margin: 0;
     color: #024e00;
-    font-family: "MockFlowFont";   
+    font-family: "Inter";
+    font-size: 14px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
-  }   
+  }
+
+  .forms {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 39px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.form_input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #024E00;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    min-height: 45px;
+    border-radius: 12px;
+    background: #f2f2f2;
+}
+
+textarea {
+    resize: vertical;
+    border-color: #024E00;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+    border-color: #024E00;
+}
+
+button {
+    color: white;
+    background-color: rgba(0, 153, 0, 0.68);
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 39px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.form_title {
+    color: #024e00;
+    font-family: 'Racama';
+}
+
+.forma {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 30px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    text-align: center;
+}
+
+.img {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.strong {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: rgba(0, 153, 0, 0.68);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.a:hover {
+    background-color: #45a049;
+}
+
+.ver_h1{
+    color: #024e00;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ver_ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ver_li {
+    background: white;
+    border: 1px solid #024e00;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+ver_li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ver_h2 {
+    color: #024e00;
+}
+
+.ver_p {
+    margin: 5px 0;
+}
+
+.ver_strong {
+    color: #024e00;
+}
+
+.ver_button {
+    background-color: #024e00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.ver_button:hover {
+    background-color: #036700;
+}
+
+.ver_a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #024e00;
+    font-weight: bold;
+}
