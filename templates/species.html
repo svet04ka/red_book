@@ -6,20 +6,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Редкие виды парка</h1>
-    <ul>
+    <header>
+        <h1>Редкие виды парка</h1>
+    </header>
+
+    <ul class="ul">
     {% for specie in species %}
-        <li>
+        <li class="li">
             {% if specie.image_path %}  <!-- Проверяем, есть ли изображение -->
-                <img src="{{ url_for('static', filename=specie.image_path) }}" style="max-width: 200px; max-height: 200px;">
-                <p>Путь к изображению: {{ specie.image_path }}</p>
+                <img class="img" src="{{ url_for('static', filename=specie.image_path) }}" style="max-width: 200px; max-height: 200px;">
             {% else %}
                 <span>Изображение не доступно</span>  <!-- Если изображение недоступно -->
             {% endif %}
-            <strong>{{ specie.name }}</strong>: {{ specie.description }} (Habitat: {{ specie.habitat }} - Status: {{ specie.status }})
+            <strong class="strong">{{ specie.name }}</strong>: {{ specie.description }} (Habitat: {{ specie.habitat }} - Status: {{ specie.status }})
         </li>
     {% endfor %}
     </ul>
-    <a href="{{ url_for('home') }}">Назад на главную</a>
+    <a class="a"  href="{{ url_for('home') }}">Назад на главную</a>
 </body>
 </html>

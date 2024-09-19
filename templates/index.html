@@ -3,8 +3,25 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Краснокнижные виды Москвы</title>
+    <style>
+        #map {
+            width: 100%; /* ширина карты */
+            height: 500px; /* высота карты */
+        }
+        #login-form {
+            display: none; /* Скрыть форму авторизации по умолчанию */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,6 +29,7 @@
     </header>
 
     <main>
+      <!--
         <h2>Редкие виды</h2>
 
         <ul class="cards">
@@ -68,17 +86,46 @@
               </a>
             </li>
           </ul>
+        -->
         <div class="buttons">
             <a href="{{ url_for('species') }}" class="button">Посмотреть виды</a>
             <a href="{{ url_for('add_species') }}" class="button">Добавить новый вид</a>
+            <button class="button" id="login-button">Вход</button>
         </div>
-
 
         <h2>Карта мест обитания</h2>
-        <div id="map" class="map">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A819193017a27dbafe1ee7d64cc5d53f01518ef10e132ccfa2b161dcd489f762e"
-                    width="100%" height="500" frameborder="0" allowfullscreen="true"></iframe>
-        </div>
+    <div id="map">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A819193017a27dbafe1ee7d64cc5d53f01518ef10e132ccfa2b161dcd489f762e"
+                width="100%" height="500" frameborder="0" allowfullscreen="true"></iframe>
+    </div>
+
+    <div class="forma" id="login-form">
+        <h2>Вход</h2>
+        <form method="POST" action="/login">
+            <label class="form_title" for="role">Роль:</label>
+            <select id="role" name="role">
+                <option value="admin">Администратор</option>
+                <option value="dep">Департамент</option>
+            </select>
+
+            <label class="form_title" for="username">Логин:</label>
+            <input class="form_input" type="text" id="username" name="username" required>
+
+            <label class="form_title" for="password">Пароль:</label>
+            <input class="form_input" type="password" id="password" name="password" required>
+
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+
+    <script>
+        // Кнопка для показа формы авторизации
+        document.getElementById('login-button').addEventListener('click', function() {
+            let loginForm = document.getElementById('login-form');
+            // При клике на кнопку показать/скрыть форму
+            loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
     </main>
 
     <footer>

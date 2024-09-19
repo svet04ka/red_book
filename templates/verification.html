@@ -1,24 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Верификация видов</title>
+    <title>Верификация записей</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Верификация видов</h1>
-    <ul>
-    {% for index, species in enumerate(species) %}
-        <li>
-            <h2>{{ species.name }}</h2>
-            <p>{{ species.description }}</p>
-            <p><strong>Место обитания:</strong> {{ species.habitat }}</p>
-            <form method="POST" action="{{ url_for('verify_species', species_index=index) }}">
-                <button type="submit">Верифицировать</button>
-            </form>
-        </li>
-    {% endfor %}
-    </ul>
-    <a href="{{ url_for('home') }}">Назад на главную</a>
+<header>
+    <h1>Верификация записей</h1>
+</header>
+
+
+{% if pending_species %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Местообитание</th>
+                <th>Изображение</th>
+                <th>Редкость</th>
+                <th>Тип</th>
+                <th>Класс</th>
+                <th>Семейство</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for species in pending_species %}
+                <tr>
+                    <td>{{ species.name }}</td>
+                    <td>{{ species.description }}</td>
+                    <td>{{ species.habitat }}</td>
+                    <td><img src="{{ url_for('static', filename=species.image_path) }}" alt="{{ species.name }}" width="100"></td>
+                    <td>{{ species.rarity }}</td>
+                    <td>{{ species.species_type }}</td>
+                    <td>{{ species.species_class }}</td>
+                    <td>{{ species.family }}</td>
+                    <td>{{ species.coords }} внести метку на <a href="https://yandex.ru/map-constructor/?um=constructor:db4262ba67842c08901a4e2523f8ae97bfbbbe94ea16432f6abfc58942f10805">карту</a></td>
+                    <td>
+                        <form method="POST" action="{{ url_for('verification') }}">
+                            <input class="form_input" type="hidden" name="species_id" value="{{ species.id }}">
+                            <button class="button" type="submit" name="action" value="approve">Подтвердить</button>
+                            <button class="button" type="submit" name="action" value="reject">Отклонить</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="ver_p">Нет записей, ожидающих подтверждения.</p>
+{% endif %}
+<a class='a' href="{{ url_for('logout') }}" id="logout-button">Выход</a>
 </body>
 </html>
+
+

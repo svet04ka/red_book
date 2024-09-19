@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Краснокнижные виды Москвы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        #map {
+            width: 100%; /* ширина карты */
+            height: 500px; /* высота карты */
+        }
+        #login-form {
+            display: none; /* Скрыть форму авторизации по умолчанию */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Краснокнижные виды Москвы</h1>
+    </header>
+
+    <div class="buttons">
+        <a class="button" href="{{ url_for('species_for_dep') }}">Посмотреть виды</a>
+        <a class="button" href="{{ url_for('add_species') }}">Добавить новый вид</a>
+        <a class="button" href="{{ url_for('logout') }}" id="logout-button">Выход</a>
+    </div>
+
+       <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Adb4262ba67842c08901a4e2523f8ae97bfbbbe94ea16432f6abfc58942f10805&amp;source=constructor"
+            width="100%" height="500" frameborder="0" allowfullscreen="true"></iframe>
+
+
+    <div class="forma" id="login-form">
+        <h2>Вход в Департамент</h2>
+        <form class="forms" method="POST" action="/login">
+            <label class="form_title" for="username">Логин:</label>
+            <input class="form_input" type="text" id="username" name="username" required>
+
+            <label class="form_title" for="password">Пароль:</label>
+            <input class="form_input" type="password" id="password" name="password" required>
+
+            <button class="" type="submit">Войти</button>
+        </form>
+    </div>
+
+    <script>
+        // Кнопка для показа формы авторизации
+        document.getElementById('logout-button').addEventListener('click', function() {
+            // Перенаправление на главную страницу при клике на "Выход"
+            window.location.href = "{{ url_for('home') }}";
+        });
+    </script>
+</body>
+</html>
