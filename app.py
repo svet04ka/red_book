@@ -96,6 +96,7 @@ def login():
     return redirect(url_for('home'))
 
 
+
 @app.route('/verification')
 def verification_page():
     if 'logged_in' in session and session['logged_in']:
